@@ -8,63 +8,63 @@ const moments = [
         unlockDate: "2026-06-28",
         caption: "Bahnhofsmoment",
         photo: "zehra-day-1.jpg",
-        text: "Dein Blick, sogar wenn du genervt schaust, ist fuer mich immer noch einer meiner liebsten Anblicke. Mit dir wird selbst ein normaler Moment besonders."
+        text: "Ich bin froh, dass du in meinem Leben bist. Du bist einfach mein Lieblingsmensch und selbst ein normaler Moment mit dir fühlt sich besonders an."
     },
     {
         title: "Tag 2",
         unlockDate: "2026-06-29",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du hast eine Art, alles waermer wirken zu lassen. Selbst an chaotischen Tagen bringst du Ruhe rein."
+        text: "Du hast eine Art, alles wärmer wirken zu lassen. Selbst an chaotischen Tagen bringst du Ruhe rein."
     },
     {
         title: "Tag 3",
         unlockDate: "2026-06-30",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Ich liebe, wie echt du bist. Nichts an dir fuehlt sich gespielt an und genau das macht dich so besonders."
+        text: "Ich liebe, wie echt du bist. Nichts an dir fühlt sich gespielt an und genau das macht dich so besonders."
     },
     {
         title: "Tag 4",
         unlockDate: "2026-07-01",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du bist schoen auf eine Weise, die nicht laut sein muss. Man merkt es einfach sofort, wenn man bei dir ist."
+        text: "Du bist schön auf eine Weise, die nicht laut sein muss. Man merkt es einfach sofort, wenn man bei dir ist."
     },
     {
         title: "Tag 5",
         unlockDate: "2026-07-02",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Mit dir fuehlen sich Erinnerungen immer staerker an. Du machst aus Kleinigkeiten etwas, das bleibt."
+        text: "Mit dir fühlen sich Erinnerungen immer stärker an. Du machst aus Kleinigkeiten etwas, das bleibt."
     },
     {
         title: "Tag 6",
         unlockDate: "2026-07-03",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Ich mag, wie viel Herz du in dir hast. Du zeigst nicht immer alles, aber man spuert es in jedem Detail."
+        text: "Ich mag, wie viel Herz du in dir hast. Du zeigst nicht immer alles, aber man spürt es in jedem Detail."
     },
     {
         title: "Tag 7",
         unlockDate: "2026-07-04",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du hast diese seltene Mischung aus stark und weich. Genau das macht dich fuer mich so unvergesslich."
+        text: "Du hast diese seltene Mischung aus stark und weich. Genau das macht dich für mich so unvergesslich."
     },
     {
         title: "Tag 8",
         unlockDate: "2026-07-05",
-        caption: "Naechstes Foto kommt",
+        caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Je naeher dein Geburtstag kommt, desto mehr denke ich daran, wie froh ich bin, dass es dich gibt."
+        text: "Je näher dein Geburtstag kommt, desto mehr denke ich daran, wie froh ich bin, dass es dich gibt."
     },
     {
         title: "Geburtstag",
         unlockDate: "2026-07-06",
         caption: "Dein Tag",
         photo: "zehra-day-1.jpg",
-        text: "Heute geht es nur um dich. Alles Gute zum Geburtstag, Zehra. Ich hoffe, dein neuer Lebensabschnitt fuehlt sich genauso schoen an, wie du ihn fuer andere machst."
+        text: "Heute geht es nur um dich. Alles Gute zum Geburtstag, Zehra. Ich hoffe, dein neuer Lebensabschnitt fühlt sich genauso schön an, wie du ihn für andere machst."
     }
 ];
 
@@ -160,8 +160,8 @@ function renderMoments() {
         text.textContent = unlocked
             ? moment.text
             : available
-                ? "Dieser Moment ist heute verfuegbar. Klick links auf den Button, um ihn freizuschalten."
-                : "Dieser Moment oeffnet sich automatisch an seinem Tag.";
+                ? "Dieser Moment ist heute verfügbar. Klick links auf den Button, um ihn freizuschalten."
+                : "Dieser Moment öffnet sich automatisch an seinem Tag.";
 
         image.src = unlocked
             ? (moment.photo || getPlaceholderImage(moment.caption))
@@ -173,7 +173,7 @@ function renderMoments() {
 
     progressLabel.textContent = `${state.unlockedCount} von ${moments.length} freigeschaltet`;
     todayLabel.textContent = availableCount >= moments.length
-        ? "Alles verfuegbar"
+        ? "Alles verfügbar"
         : `Heute maximal ${availableCount} offen`;
 }
 
@@ -185,20 +185,20 @@ function syncStatus() {
     const birthdayReached = now.getTime() >= birthdayDate.getTime();
 
     if (birthdayReached) {
-        statusCard.textContent = "Heute ist Zehras Geburtstag. Alle Momente koennen jetzt geoeffnet werden und die Geburtstagsseite ist komplett bereit.";
+        statusCard.textContent = "Heute ist Zehras Geburtstag. Alle Momente können jetzt geöffnet werden und die Geburtstagsseite ist komplett bereit.";
     } else if (canUnlockToday) {
         statusCard.textContent = `Heute wartet ${availableCount - state.unlockedCount} neuer Moment auf dich. Du kannst jetzt genau einen freischalten.`;
     } else if (state.unlockedCount >= availableCount) {
-        statusCard.textContent = `Der heutige Moment wurde schon geoeffnet. Der naechste wartet ab ${formatWait(getNextUnlockDate(now))}.`;
+        statusCard.textContent = `Der heutige Moment wurde schon geöffnet. Der nächste wartet ab ${formatWait(getNextUnlockDate(now))}.`;
     } else {
-        statusCard.textContent = "Heute ist noch nichts freigegeben. Schau spaeter wieder rein.";
+        statusCard.textContent = "Heute ist noch nichts freigegeben. Schau später wieder rein.";
     }
 
     unlockButton.disabled = !canUnlockToday && !(birthdayReached && state.unlockedCount < moments.length);
     unlockButton.textContent = birthdayReached
         ? "Restliche Momente freischalten"
         : canUnlockToday
-            ? "Heutigen Moment oeffnen"
+            ? "Heutigen Moment öffnen"
             : "Morgen wieder da";
 }
 
