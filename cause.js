@@ -185,7 +185,7 @@ function syncStatus() {
     const birthdayReached = now.getTime() >= birthdayDate.getTime();
 
     if (birthdayReached) {
-        statusCard.textContent = "Heute ist Zehras Geburtstag. Alle Momente können jetzt geöffnet werden und die Geburtstagsseite ist komplett bereit.";
+        statusCard.textContent = "Heute ist Zehras Geburtstag. Alle Momente können jetzt direkt hier geöffnet werden.";
     } else if (canUnlockToday) {
         statusCard.textContent = `Heute wartet ${availableCount - state.unlockedCount} neuer Moment auf dich. Du kannst jetzt genau einen freischalten.`;
     } else if (state.unlockedCount >= availableCount) {
@@ -196,7 +196,7 @@ function syncStatus() {
 
     unlockButton.disabled = !canUnlockToday && !(birthdayReached && state.unlockedCount < moments.length);
     unlockButton.textContent = birthdayReached
-        ? "Restliche Momente freischalten"
+        ? "Alle Momente öffnen"
         : canUnlockToday
             ? "Heutigen Moment öffnen"
             : "Morgen wieder da";

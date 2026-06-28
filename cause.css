@@ -146,13 +146,11 @@ h1 {
     color: var(--muted);
 }
 
-.unlock-button,
-.birthday-link {
+.unlock-button {
     width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
     margin-top: 1rem;
     border-radius: 999px;
     padding: 1rem 1.2rem;
@@ -178,14 +176,8 @@ h1 {
 }
 
 .unlock-button:not(:disabled):active,
-.birthday-link:active {
+.unlock-button:active {
     transform: scale(0.985);
-}
-
-.birthday-link {
-    color: var(--ink);
-    background: rgba(255, 248, 241, 0.95);
-    border: 1px solid var(--line);
 }
 
 .content-card {
@@ -370,7 +362,7 @@ h1 {
     }
 
     .unlock-button,
-    .birthday-link {
+    .unlock-button {
         font-size: 0.98rem;
         min-height: 50px;
     }
