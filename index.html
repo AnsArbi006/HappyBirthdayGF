@@ -2,13 +2,52 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=cause.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zehra Countdown</title>
-    <script>
-        window.location.replace("cause.html");
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="cause.css">
 </head>
 <body>
+    <div class="film-grain"></div>
+    <div class="countdown-panel">
+        <div class="countdown-title">Countdown zu Zehras Geburtstag</div>
+        <div class="countdown-value" id="countdown-value">Lädt...</div>
+    </div>
+
+    <main class="layout">
+        <section class="intro-card">
+            <p class="label">Daily Drop</p>
+            <h1>Ein Kompliment und ein Foto pro Tag für Zehra</h1>
+            <p class="intro-copy">
+                Jeden Tag kann genau ein neuer Moment geöffnet werden. Wenn du den heutigen schon gesehen hast, wartet der nächste bis morgen auf dich.
+            </p>
+            <div class="status-card" id="status-card"></div>
+            <button class="unlock-button" id="unlock-button">Heutigen Moment öffnen</button>
+        </section>
+
+        <section class="content-card">
+            <div class="progress-row">
+                <span id="progress-label">0 von 9 freigeschaltet</span>
+                <span id="today-label">Heute verfügbar</span>
+            </div>
+            <div id="moments-grid" class="moments-grid"></div>
+        </section>
+    </main>
+
+    <template id="moment-template">
+        <article class="moment-card">
+            <div class="photo-frame">
+                <img class="moment-image" alt="">
+                <span class="photo-caption"></span>
+            </div>
+            <div class="moment-meta">
+                <p class="moment-day"></p>
+                <h2 class="moment-title"></h2>
+                <p class="moment-text"></p>
+            </div>
+        </article>
+    </template>
+
+    <script src="cause.js"></script>
 </body>
 </html>
