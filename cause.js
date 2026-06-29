@@ -84,6 +84,8 @@ const adminForm = document.getElementById("admin-form");
 const adminPassword = document.getElementById("admin-password");
 const adminError = document.getElementById("admin-error");
 const adminClose = document.getElementById("admin-close");
+const adminExit = document.getElementById("admin-exit");
+const unlockTimer = document.getElementById("unlock-timer");
 
 function todayKey(date = new Date()) {
     const year = date.getFullYear();
@@ -150,6 +152,19 @@ function formatWait(target) {
     });
 }
 
+function formatShortDuration(distance) {
+    if (distance <= 0) {
+        return "Jetzt wieder verfügbar.";
+    }
+
+    const totalSeconds = Math.floor(distance / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return `Wieder in ${hours} Std ${minutes} Min ${seconds} Sek`;
+}
+
 function getPlaceholderImage(text) {
     const label = encodeURIComponent(text);
     return `data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%23ead7c2'/%3E%3Cstop offset='1' stop-color='%23d1b49d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='1000' fill='url(%23g)'/%3E%3Ccircle cx='140' cy='160' r='60' fill='%23f7ead8' fill-opacity='.75'/%3E%3Ccircle cx='620' cy='820' r='90' fill='%23fff7ee' fill-opacity='.45'/%3E%3Ctext x='400' y='480' font-family='Georgia' font-size='48' text-anchor='middle' fill='%23614a3e'%3ENoch ein Foto%3C/text%3E%3Ctext x='400' y='550' font-family='Georgia' font-size='36' text-anchor='middle' fill='%23614a3e'%3E${label}%3C/text%3E%3C/svg%3E`;
@@ -206,13 +221,16 @@ function syncStatus() {
     const availableCount = getAvailableCount(now);
     const canUnlockToday = state.lastUnlockDate !== todayKey(now) && state.unlockedCount < availableCount;
     const birthdayReached = now.getTime() >= birthdayDate.getTime();
+    const nextUnlockDate = getNextUnlockDate(now);
 
     adminBadge.classList.toggle("hidden", !adminMode);
+    adminExit.classList.toggle("hidden", !adminMode);
 
     if (adminMode) {
         statusCard.textContent = "Admin-Modus ist aktiv. Du siehst gerade alle Tage und alle Bilder unabhängig vom Datum.";
         unlockButton.disabled = false;
         unlockButton.textContent = "Admin-Modus aktiv";
+        unlockTimer.classList.add("hidden");
         return;
     }
 
@@ -232,6 +250,13 @@ function syncStatus() {
         : canUnlockToday
             ? "Heutigen Moment öffnen"
             : "Morgen wieder da";
+
+    if (!canUnlockToday && !birthdayReached && state.unlockedCount >= availableCount) {
+        unlockTimer.textContent = `${formatShortDuration(nextUnlockDate.getTime() - now.getTime())} · ${formatWait(nextUnlockDate)}`;
+        unlockTimer.classList.remove("hidden");
+    } else {
+        unlockTimer.classList.add("hidden");
+    }
 }
 
 function unlockMoment() {
@@ -306,6 +331,11 @@ window.addEventListener("load", () => {
     unlockButton.addEventListener("click", unlockMoment);
     adminTrigger.addEventListener("click", openAdminDialog);
     adminClose.addEventListener("click", closeAdminDialog);
+    adminExit.addEventListener("click", () => {
+        setAdminMode(false);
+        renderMoments();
+        syncStatus();
+    });
     adminForm.addEventListener("submit", (event) => {
         event.preventDefault();
         if (adminPassword.value === adminPasswordValue) {
