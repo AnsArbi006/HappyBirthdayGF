@@ -57,6 +57,110 @@ body {
     backdrop-filter: blur(14px);
 }
 
+.admin-badge {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 4.7rem);
+    right: 1rem;
+    z-index: 6;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(201, 138, 116, 0.94);
+    color: #fff8f1;
+    font-size: 0.78rem;
+    box-shadow: 0 12px 24px rgba(67, 45, 34, 0.14);
+}
+
+.admin-trigger {
+    position: fixed;
+    right: 0.45rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.35rem);
+    z-index: 7;
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(53, 37, 30, 0.12);
+    color: rgba(53, 37, 30, 0.2);
+    cursor: pointer;
+}
+
+.admin-dialog {
+    margin: auto;
+    width: min(360px, calc(100vw - 1.5rem));
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.admin-dialog::backdrop {
+    background: rgba(29, 20, 16, 0.35);
+    backdrop-filter: blur(6px);
+}
+
+.admin-form {
+    background: rgba(255, 250, 242, 0.98);
+    border: 1px solid rgba(53, 37, 30, 0.08);
+    border-radius: 24px;
+    padding: 1.1rem;
+    box-shadow: 0 24px 60px rgba(67, 45, 34, 0.22);
+}
+
+.admin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+}
+
+.admin-copy {
+    margin-top: 0.35rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.admin-input {
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid rgba(53, 37, 30, 0.12);
+    border-radius: 16px;
+    padding: 0.9rem 1rem;
+    font: inherit;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--ink);
+}
+
+.admin-error {
+    margin-top: 0.6rem;
+    color: #a1483e;
+    font-size: 0.92rem;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.admin-button {
+    flex: 1;
+    border: none;
+    border-radius: 999px;
+    min-height: 48px;
+    background: linear-gradient(135deg, #c98a74, var(--accent) 55%, var(--accent-deep));
+    color: #fff8f1;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-button-secondary {
+    background: rgba(255, 248, 241, 0.95);
+    color: var(--ink);
+    border: 1px solid rgba(53, 37, 30, 0.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
 .countdown-title {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -317,6 +421,11 @@ h1 {
         width: auto;
         padding: 0.9rem 1rem;
         border-radius: 22px;
+    }
+
+    .admin-badge {
+        top: calc(env(safe-area-inset-top, 0px) + 4.55rem);
+        right: 0.5rem;
     }
 
     .countdown-title {

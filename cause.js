@@ -1,6 +1,8 @@
 const birthdayDate = new Date("2026-07-06T00:00:00+02:00");
 const releaseStart = new Date("2026-06-28T00:00:00+02:00");
 const storageKey = "zehraBirthdayUnlockStateV1";
+const adminStorageKey = "zehraBirthdayAdminModeV1";
+const adminPasswordValue = "ans123";
 
 const moments = [
     {
@@ -75,6 +77,13 @@ const progressLabel = document.getElementById("progress-label");
 const todayLabel = document.getElementById("today-label");
 const momentsGrid = document.getElementById("moments-grid");
 const template = document.getElementById("moment-template");
+const adminBadge = document.getElementById("admin-badge");
+const adminTrigger = document.getElementById("admin-trigger");
+const adminDialog = document.getElementById("admin-dialog");
+const adminForm = document.getElementById("admin-form");
+const adminPassword = document.getElementById("admin-password");
+const adminError = document.getElementById("admin-error");
+const adminClose = document.getElementById("admin-close");
 
 function todayKey(date = new Date()) {
     const year = date.getFullYear();
@@ -95,6 +104,14 @@ function readState() {
 
 function writeState(state) {
     localStorage.setItem(storageKey, JSON.stringify(state));
+}
+
+function isAdminMode() {
+    return localStorage.getItem(adminStorageKey) === "true";
+}
+
+function setAdminMode(value) {
+    localStorage.setItem(adminStorageKey, value ? "true" : "false");
 }
 
 function getAvailableCount(now = new Date()) {
@@ -140,7 +157,8 @@ function getPlaceholderImage(text) {
 
 function renderMoments() {
     const state = readState();
-    const availableCount = getAvailableCount();
+    const adminMode = isAdminMode();
+    const availableCount = adminMode ? moments.length : getAvailableCount();
     momentsGrid.innerHTML = "";
 
     moments.forEach((moment, index) => {
@@ -150,7 +168,7 @@ function renderMoments() {
         const day = node.querySelector(".moment-day");
         const title = node.querySelector(".moment-title");
         const text = node.querySelector(".moment-text");
-        const unlocked = index < state.unlockedCount;
+        const unlocked = adminMode || index < state.unlockedCount;
         const available = index < availableCount;
 
         node.classList.toggle("locked", !unlocked);
@@ -171,18 +189,32 @@ function renderMoments() {
         momentsGrid.appendChild(node);
     });
 
-    progressLabel.textContent = `${state.unlockedCount} von ${moments.length} freigeschaltet`;
-    todayLabel.textContent = availableCount >= moments.length
-        ? "Alles verfügbar"
-        : `Heute maximal ${availableCount} offen`;
+    progressLabel.textContent = adminMode
+        ? `${moments.length} von ${moments.length} freigeschaltet`
+        : `${state.unlockedCount} von ${moments.length} freigeschaltet`;
+    todayLabel.textContent = adminMode
+        ? "Admin sieht alles"
+        : availableCount >= moments.length
+            ? "Alles verfügbar"
+            : `Heute maximal ${availableCount} offen`;
 }
 
 function syncStatus() {
+    const adminMode = isAdminMode();
     const now = new Date();
     const state = readState();
     const availableCount = getAvailableCount(now);
     const canUnlockToday = state.lastUnlockDate !== todayKey(now) && state.unlockedCount < availableCount;
     const birthdayReached = now.getTime() >= birthdayDate.getTime();
+
+    adminBadge.classList.toggle("hidden", !adminMode);
+
+    if (adminMode) {
+        statusCard.textContent = "Admin-Modus ist aktiv. Du siehst gerade alle Tage und alle Bilder unabhängig vom Datum.";
+        unlockButton.disabled = false;
+        unlockButton.textContent = "Admin-Modus aktiv";
+        return;
+    }
 
     if (birthdayReached) {
         statusCard.textContent = "Heute ist Zehras Geburtstag. Alle Momente können jetzt direkt hier geöffnet werden.";
@@ -203,6 +235,12 @@ function syncStatus() {
 }
 
 function unlockMoment() {
+    if (isAdminMode()) {
+        renderMoments();
+        syncStatus();
+        return;
+    }
+
     const now = new Date();
     const state = readState();
     const availableCount = getAvailableCount(now);
@@ -241,6 +279,17 @@ function updateCountdown() {
     countdownValue.textContent = formatRemaining(distance);
 }
 
+function openAdminDialog() {
+    adminError.classList.add("hidden");
+    adminPassword.value = "";
+    adminDialog.showModal();
+    window.setTimeout(() => adminPassword.focus(), 30);
+}
+
+function closeAdminDialog() {
+    adminDialog.close();
+}
+
 window.addEventListener("load", () => {
     const initialState = readState();
     if (new Date().getTime() < releaseStart.getTime() && initialState.unlockedCount !== 0) {
@@ -255,5 +304,20 @@ window.addEventListener("load", () => {
     gsap.from(".content-card", { opacity: 0, y: 34, duration: 0.9, delay: 0.12, ease: "power3.out" });
 
     unlockButton.addEventListener("click", unlockMoment);
+    adminTrigger.addEventListener("click", openAdminDialog);
+    adminClose.addEventListener("click", closeAdminDialog);
+    adminForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (adminPassword.value === adminPasswordValue) {
+            setAdminMode(true);
+            closeAdminDialog();
+            renderMoments();
+            syncStatus();
+            return;
+        }
+
+        adminError.classList.remove("hidden");
+        adminPassword.select();
+    });
     window.setInterval(updateCountdown, 1000);
 });

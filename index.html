@@ -13,6 +13,8 @@
         <div class="countdown-title">Countdown zu Zehras Geburtstag</div>
         <div class="countdown-value" id="countdown-value">Lädt...</div>
     </div>
+    <div class="admin-badge hidden" id="admin-badge">Admin-Modus aktiv</div>
+    <button class="admin-trigger" id="admin-trigger" type="button" aria-label="Admin-Modus öffnen">.</button>
 
     <main class="layout">
         <section class="intro-card">
@@ -47,6 +49,19 @@
             </div>
         </article>
     </template>
+
+    <dialog class="admin-dialog" id="admin-dialog">
+        <form class="admin-form" id="admin-form" method="dialog">
+            <p class="admin-title">Admin-Modus</p>
+            <p class="admin-copy">Passwort eingeben, um alle Tage sofort zu sehen.</p>
+            <input class="admin-input" id="admin-password" type="password" placeholder="Passwort" autocomplete="off">
+            <p class="admin-error hidden" id="admin-error">Falsches Passwort.</p>
+            <div class="admin-actions">
+                <button class="admin-button admin-button-secondary" id="admin-close" type="button">Schließen</button>
+                <button class="admin-button" type="submit">Öffnen</button>
+            </div>
+        </form>
+    </dialog>
 
     <script src="cause.js"></script>
 </body>
