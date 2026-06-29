@@ -72,16 +72,23 @@ body {
 
 .admin-trigger {
     position: fixed;
-    right: 0.45rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.35rem);
+    right: 0.65rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.55rem);
     z-index: 7;
-    width: 18px;
-    height: 18px;
-    border: none;
+    min-width: 52px;
+    min-height: 28px;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid rgba(53, 37, 30, 0.1);
     border-radius: 999px;
-    background: rgba(53, 37, 30, 0.12);
-    color: rgba(53, 37, 30, 0.2);
+    background: rgba(255, 248, 241, 0.78);
+    color: rgba(53, 37, 30, 0.62);
+    font: inherit;
+    font-size: 0.72rem;
+    line-height: 1;
     cursor: pointer;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 18px rgba(67, 45, 34, 0.1);
+    touch-action: manipulation;
 }
 
 .admin-dialog {
@@ -450,6 +457,11 @@ h1 {
     .admin-badge {
         top: calc(env(safe-area-inset-top, 0px) + 4.55rem);
         right: 0.5rem;
+    }
+
+    .admin-trigger {
+        right: 0.5rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
     }
 
     .countdown-title {
