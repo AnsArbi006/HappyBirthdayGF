@@ -15,42 +15,42 @@ const moments = [
         unlockDate: "2026-06-29",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du hast eine Art, alles wärmer wirken zu lassen. Selbst an chaotischen Tagen bringst du Ruhe rein."
+        text: "Auch wenn du mir manchmal wirklich auf die Nerven gehst, liebe ich selbst genau das an dir, weil es zeigt, wie sehr du zu meinem Alltag gehörst und wie besonders selbst unsere kleinen Momente für mich sind."
     },
     {
         title: "Tag 3",
         unlockDate: "2026-06-30",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Ich liebe, wie echt du bist. Nichts an dir fühlt sich gespielt an und genau das macht dich so besonders."
+        text: "Du bist einer der schönsten Zufälle, die mir je passiert sind, weil wir eigentlich die ganze Zeit so nah beieinander waren und uns trotzdem erst genau dann gefunden haben, als der richtige Moment dafür da war."
     },
     {
         title: "Tag 4",
         unlockDate: "2026-07-01",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du bist schön auf eine Weise, die nicht laut sein muss. Man merkt es einfach sofort, wenn man bei dir ist."
+        text: "Auch wenn du manchmal an deinen Kochkünsten zweifelst, freue ich mich jedes Mal auf dein Essen, weil man spürt, dass es von dir kommt, und es für mich dadurch jedes Mal besonders und einfach unglaublich lecker ist."
     },
     {
         title: "Tag 5",
         unlockDate: "2026-07-02",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Mit dir fühlen sich Erinnerungen immer stärker an. Du machst aus Kleinigkeiten etwas, das bleibt."
+        text: "Selbst wenn wir gar nichts Großes machen und einfach nur zusammen zu Hause sind, fühlt sich genau das für mich schön an, weil es nicht darauf ankommt, was wir machen, sondern dass ich diese Zeit mit dir verbringen darf."
     },
     {
         title: "Tag 6",
         unlockDate: "2026-07-03",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Ich mag, wie viel Herz du in dir hast. Du zeigst nicht immer alles, aber man spürt es in jedem Detail."
+        text: "Ich freue mich jetzt schon auf all die Jahre, die noch vor uns liegen, und ich weiß tief in mir, dass du irgendwann eine wundervolle Mutter sein wirst, weil du so viel Herz, Wärme und Liebe in dir trägst."
     },
     {
         title: "Tag 7",
         unlockDate: "2026-07-04",
         caption: "Nächstes Foto kommt",
         photo: "",
-        text: "Du hast diese seltene Mischung aus stark und weich. Genau das macht dich für mich so unvergesslich."
+        text: "Auch wenn du manchmal an dir selbst zweifelst, sehe ich in dir so viele schöne Dinge, die du selbst vielleicht gar nicht immer bemerkst, und genau deshalb wünsche ich mir, dass du dich eines Tages mit meinen Augen sehen kannst."
     },
     {
         title: "Tag 8",
