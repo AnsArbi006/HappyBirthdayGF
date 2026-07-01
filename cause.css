@@ -72,23 +72,25 @@ body {
 
 .admin-trigger {
     position: fixed;
-    right: 0.65rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.55rem);
+    right: 0.75rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem);
     z-index: 7;
-    min-width: 52px;
-    min-height: 28px;
-    padding: 0.35rem 0.55rem;
+    min-width: 64px;
+    min-height: 36px;
+    padding: 0.5rem 0.75rem;
     border: 1px solid rgba(53, 37, 30, 0.1);
     border-radius: 999px;
-    background: rgba(255, 248, 241, 0.78);
-    color: rgba(53, 37, 30, 0.62);
+    background: rgba(255, 248, 241, 0.9);
+    color: rgba(53, 37, 30, 0.72);
     font: inherit;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
+    font-weight: 700;
     line-height: 1;
     cursor: pointer;
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 18px rgba(67, 45, 34, 0.1);
+    box-shadow: 0 10px 22px rgba(67, 45, 34, 0.12);
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .admin-dialog {
@@ -461,7 +463,9 @@ h1 {
 
     .admin-trigger {
         right: 0.5rem;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.55rem);
+        min-width: 60px;
+        min-height: 34px;
     }
 
     .countdown-title {
